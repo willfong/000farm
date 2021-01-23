@@ -3,6 +3,7 @@ title: Simple Moisture Monitor
 description: A moisture sensor to alert you when you need to water your plants.
 ---
 
+This code will check the value of the moisture sensor. If the value is over 500, it will turn the LED green, otherwise turn the LED red.
 
 ```
 #define moistureData A1
@@ -32,7 +33,7 @@ void loop() {
   Serial.print("MOISTURE READING");
   Serial.println(moistureValue);
 
-  if (moistureValue > 700) {
+  if (moistureValue > 500) {
     digitalWrite(ledGPin, LOW);
     digitalWrite(ledRPin, HIGH);
   } else {
