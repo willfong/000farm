@@ -49,7 +49,6 @@ export default {
       .only(["title", "updatedAt", "description", "publishdate"])
       .sortBy("updatedAt", "desc")
       .fetch();
-    console.log(articles);
     return { articles };
   },
 };

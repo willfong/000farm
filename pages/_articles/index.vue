@@ -131,9 +131,7 @@
 <script>
 export default {
   async asyncData({ $content, params }) {
-    console.log(params);
     const article = await $content(params.articles).fetch();
-    console.log(article);
     return { article };
   },
 };
