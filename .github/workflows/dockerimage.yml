@@ -1,0 +1,35 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  REGISTRY_HOSTNAME: ${{ secrets.REGISTRY_HOSTNAME }}
+  REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+  REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+  CONTAINER_IMAGE: 000farm
+
+jobs:
+  build-and-push:
+    name: Build and push to private repository
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file Dockerfile --tag $CONTAINER_IMAGE
+
+      - name: Log into registry
+        run: echo "$REGISTRY_PASSWORD" | docker login $REGISTRY_HOSTNAME -u $REGISTRY_USERNAME --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=$REGISTRY_HOSTNAME/$CONTAINER_IMAGE:$(date +%s)
+          IMAGE_LATEST=$REGISTRY_HOSTNAME/$CONTAINER_IMAGE:latest
+          docker tag $CONTAINER_IMAGE $IMAGE_ID
+          docker tag $CONTAINER_IMAGE $IMAGE_LATEST
+          docker push $IMAGE_ID
+          docker push $IMAGE_LATEST
