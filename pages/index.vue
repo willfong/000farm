@@ -9,9 +9,7 @@
         >
           000.farm
         </h2>
-        <h3 class="text-xl text-gray-500">
-          Briding technology solutions with the agriculture industry.
-        </h3>
+        <h3 class="text-xl text-gray-500">Technology + Agriculture</h3>
         <p class="text-red-400">
           Work in progress. Just need to get things started...
         </p>
