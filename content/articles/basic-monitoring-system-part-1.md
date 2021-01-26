@@ -3,7 +3,6 @@ title: Basic Monitoring System
 description: Using sensors to collect data
 ---
 
-# There's stuff here
 
 Code
 ```
@@ -26,23 +25,28 @@ void setup() {
 
 void loop() {
   digitalWrite(moisture1Power, HIGH);
-  digitalWrite(moisture2Power, HIGH);
-  delay(500);
+  delay(50);
   int moisture1Read = analogRead(moisture1Data);
-  int moisture2Read = analogRead(moisture2Data);
   digitalWrite(moisture1Power, LOW);
-  digitalWrite(moisture2Power, LOW);
   int moisture1Value = 1024 - moisture1Read;
-  int moisture2Value = 1024 - moisture2Read;
   Serial.print("MOISTURE_1 ");
   Serial.println(moisture1Value);
+  delay(500);
+
+  digitalWrite(moisture2Power, HIGH);
+  delay(50);
+  int moisture2Read = analogRead(moisture2Data);
+  digitalWrite(moisture2Power, LOW);
+  int moisture2Value = 1024 - moisture2Read;
   Serial.print("MOISTURE_2 ");
   Serial.println(moisture2Value);
+  delay(500);
 
   int tempAmbientRead = analogRead(tempAmbientData);
   float tempAmbientValue = tempAmbientRead * (5000 / 1024.0);
   Serial.print("TEMP_AMBIENT ");
   Serial.println(tempAmbientValue / 10);
+
   int tempGrowLightRead = analogRead(tempGrowLightData);
   float tempGrowLightValue = tempGrowLightRead * (5000 / 1024.0);
   Serial.print("TEMP_GROWLIGHT ");
@@ -56,6 +60,6 @@ void loop() {
     Serial.println("1");
   }
 
-  delay(10000);
+  delay(60000);
 }
 ```
