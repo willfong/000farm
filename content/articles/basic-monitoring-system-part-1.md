@@ -6,7 +6,6 @@ description: Using sensors to collect data
 
 Code
 ```
-
 #define tempAmbientData A3
 #define tempGrowLightData A2
 #define moisture1Data A6
