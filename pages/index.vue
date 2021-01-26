@@ -16,9 +16,11 @@
       </div>
       <div class="mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
         <div v-for="article in articles" :key="article.path">
+          <!--
           <p class="text-sm text-gray-500">
             <time datetime="2020-03-16">{{ article.updatedAt }}</time>
           </p>
+          -->
           <NuxtLink :to="article.path" class="mt-2 block">
             <p class="text-xl font-semibold text-gray-900">
               {{ article.title }}
@@ -45,7 +47,7 @@ export default {
   async asyncData({ $content, params }) {
     const articles = await $content("articles")
       .only(["title", "updatedAt", "description", "path"])
-      .sortBy("updatedAt", "desc")
+      .sortBy("title")
       .fetch();
     return { articles };
   },
